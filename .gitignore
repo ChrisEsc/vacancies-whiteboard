@@ -1,0 +1,10 @@
+.env
+application/cache/*
+!application/cache/.htaccess
+!application/cache/index.html
+application/logs/*
+!application/logs/index.html
+!application/logs/.htaccess
+documents/*
+images/pictures/*
+error_log
