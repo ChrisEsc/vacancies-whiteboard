@@ -7,4 +7,5 @@ application/logs/*
 !application/logs/.htaccess
 documents/*
 images/pictures/*
+vendor/
 error_log
