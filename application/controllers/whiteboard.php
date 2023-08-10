@@ -1,10 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Whiteboard extends CI_Controller {
-
 	public function index() {
 		$data = "";
-
 		$this->load->view('template/header');
         $this->load->view('whiteboard/index',$data);
         $this->load->view('template/footer');
@@ -33,8 +31,7 @@ class Whiteboard extends CI_Controller {
 			$result = $this->db->query($commandText);
 			$query_count = $result->result();
 
-			if(count($query_result) == 0) 
-			{
+			if(count($query_result) == 0) {
 				$data["totalCount"] = 0;
 				$data["data"] 		= array();
 				die(json_encode($data));
@@ -104,8 +101,7 @@ class Whiteboard extends CI_Controller {
 			$result = $this->db->query($commandText);
 			$query_count = $result->result();
 
-			if(count($query_result) == 0) 
-			{
+			if(count($query_result) == 0) {
 				$data["totalCount"] = 0;
 				$data["data"] 		= array();
 				die(json_encode($data));

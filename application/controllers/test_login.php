@@ -1,7 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Test_Login extends CI_Controller {
-
 	public function index() {
 		$data = "";
 
