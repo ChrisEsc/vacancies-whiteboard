@@ -215,7 +215,6 @@
     var crudType = "";
     var pageScrollPos = 0; // variable used for returning page scroll position after table reload
 
-    // console.log(100vh);
     $(document).ready(function() {
       $("#add_btn").click(function(){
         crudType = "Add";
@@ -277,7 +276,6 @@
 
       var contenders_table = $("#contenders_table").DataTable({
         scrollY         : '60vh',
-        // paging          : false,
         info            : false,
         deferRender     : true,
         scrollCollapse  : true,
@@ -363,12 +361,10 @@
     }); // end of document onReady() function
 
     function toggleStar(el) {
-      
       var button = el.closest("button");
       var row = el.closest("tr");
       var id = row.children[1].textContent;
       var priority = (row.children[0].textContent == "star") ? 1: 0; // star-1, star_border-0
-      // console.log(priority);
 
       $.ajax({
         type: "POST",
@@ -419,7 +415,6 @@
 
           $("#emp_no").val(data.emp_no);
           $("#empstatus").selectpicker('val', data.empstatus);
-
           $("#poscode").val(data.poscode);
           $("#add_contender_modal").modal("show");
           crudType = "Edit";

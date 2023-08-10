@@ -97,11 +97,9 @@
     var whiteboard_data_json = [];
 
     $(document).ready(function() {
-      // ajaxContenders();
       ajaxVacancies();
-      // ajaxWhiteboard();
 
-      // contender search function
+      //contender search function
       //prevent page refresh (submit) on enter key
       $("#contender_search_form").submit(function(e) {e.preventDefault();});
       $("#contender_search_input").on("keyup", function() {
@@ -112,21 +110,19 @@
         });
       });
 
-      // vacancy search function
+      //vacancy search function
       //prevent page refresh (submit) on enter key
       $("#vacancy_search_form").submit(function(e) {e.preventDefault();});
       $("#vacancy_search_input").on("keyup", function(event) {
         var value = $(this).val().toLowerCase();
-        if(event.keyCode === 13) { // ajax on enter key
-          $(this).val(""); // clear search term
+        if(event.keyCode === 13) { //ajax on enter key
+          $(this).val(""); //clear search term
           ajaxVacancies(value);
         }
       });
-    }); // end of document onReady() function
+    }); //end of document onReady() function
 
     function ajaxVacancies(query = null) {
-      // var vacancies_data_json;
-
       $.ajax({
         type: "POST",
         url: "<?php echo base_url()?>vacancies/vacancies_list_groupby_department",
@@ -143,8 +139,6 @@
     }
 
     function ajaxContenders(query = null) {
-      // var contenders_data_json;
-
       $.ajax({
         type: "POST",
         url: "<?php echo base_url()?>whiteboard/contenders_list",
@@ -161,8 +155,6 @@
     }
 
     function ajaxWhiteboard() {
-      // var whiteboard_data_json;
-
       $.ajax({
         type: "POST",
         url: "<?php echo base_url()?>whiteboard/wlist",
@@ -170,7 +162,6 @@
         dataType: "json",
         success: function(result, status, xhr) {
           whiteboard_data_json = result.data;
-          console.log(whiteboard_data_json);
           initDragula();
         }
       });
@@ -208,8 +199,7 @@
             "<tr><td class=\'text-right no-border\'><b>Experience</b></td><td class=\'text-left no-border\'>" + item.experience + "</td></tr>" + 
             "<tr><td class=\'text-right no-border\'><b>Training</b></td><td class=\'text-left no-border\'>" + item.training + "</td></tr>" + 
             "<tr><td class=\'text-right no-border\'><b>Eligibility</b></td><td class=\'text-left no-border\'>" + item.eligibility + "</td></tr>" + 
-            "<tr><td class=\'text-right no-border\'><b>Competency</b></td><td class=\'text-left no-border\'>" + item.competency + "</td></tr>" + 
-            // "<tr><td class=\'text-right\'><b></b></td><td class=\'text-left\'></td></tr>" + 
+            "<tr><td class=\'text-right no-border\'><b>Competency</b></td><td class=\'text-left no-border\'>" + item.competency + "</td></tr>" +
           "</tbody></table>";
 
           html += '<div class="tr">' +
@@ -224,7 +214,6 @@
         }
         html += '</div>';
         div.innerHTML = html;
-
         vacancies_div.appendChild(div);
       }
     }
@@ -235,7 +224,6 @@
 
       for(contender of data) {
         var div = document.createElement("div");
-
         div.id = contender.id;
         div.classList.add("row", "contender-style");
         div.setAttribute("data-name", contender.name);

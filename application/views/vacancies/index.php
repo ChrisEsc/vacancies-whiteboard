@@ -237,12 +237,6 @@
   <script type="text/javascript">
     var crudType = "";
     $(document).ready(function(){
-      // $("#add_btn").click(function(){
-      //   crudType = "Add";
-      //   $("#add_vacancy_modal").modal("show");
-      // });
-
-
       $("#update_btn").click(function(){
         Swal.fire({
           title: 'Are you sure you want to update vacancies from Plantilla?',
@@ -318,8 +312,6 @@
             $("#vacancies_table").DataTable().ajax.reload();
           },
           error: function(xhr, status, errorThrown) {
-            console.log(xhr.responseText);
-            console.log(errorThrown);
             $("#vacancies_table").DataTable().ajax.reload();
           }
         });
@@ -345,13 +337,6 @@
         drawCallback: function(settings) {
           $('.dataTables_scrollBody table thead tr').css({visibility:'collapse'}); // fix another thead showing inside table body
         },
-        // columnDefs: [{
-        //   createdCell: function(td, cellData, rowData, row, col) {
-        //     console.log("Hello");
-        //     console.log(col);
-        //     console.log(cellData);
-        //   }
-        // }],
         columns: [
           {data: 'id', width: '3%', visible: false, bSortable: false},
           {data: 'plantilla_item_no', width: '5%', bSortable: false},
