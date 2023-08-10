@@ -1,10 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Vacancies extends CI_Controller {
-
 	public function index() {
 		$data = "";
-
 		$this->load->view('template/header');
         $this->load->view('vacancies/index',$data);
         $this->load->view('template/footer');
@@ -49,13 +47,12 @@ class Vacancies extends CI_Controller {
 			$result = $this->db->query($commandText);
 			$query_count = $result->result();
 
-			if(count($query_result) == 0 & $transaction_type == 'Report') 
-			{
+			if(count($query_result) == 0 & $transaction_type == 'Report') {
 				$data = array("success"=> false, "data"=>'No records found!');
 				die(json_encode($data));
 			}
-			if(count($query_result) == 0 & $transaction_type == 'Grid') 
-			{
+
+			if(count($query_result) == 0 & $transaction_type == 'Grid') {
 				$data["totalCount"] = 0;
 				$data["data"] 		= array();
 				die(json_encode($data));
@@ -172,11 +169,6 @@ class Vacancies extends CI_Controller {
 					$this->vacancies_model->id 			= $id;
 				}
 
-				// if(count($query_result) > 0) {
-				// 	$data = array("success"=> false, "data"=>"Vacancy already exists.");
-				// 	die(json_encode($data));
-				// }
-
 				$this->vacancies_model->item_desc 			= $item_desc;
 				$this->vacancies_model->item_code 			= $item_code;
 				$this->vacancies_model->item_desc_detail 	= ($item_desc_detail == "") ? null: $item_desc_detail;
@@ -254,9 +246,6 @@ class Vacancies extends CI_Controller {
 								ORDER BY a.id ASC";
 				$result = $this->db->query($commandText);
 				$query_result2 = $result->result();
-
-				// echo $commandText;
-				// die();
 				
 				$commandText = "SELECT COUNT(a.id) AS count
 								FROM vacancies a
@@ -271,8 +260,7 @@ class Vacancies extends CI_Controller {
 				$result = $this->db->query($commandText);
 				$query_count = $result->result();
 
-				if(count($query_result2) != 0) 
-				{
+				if(count($query_result2) != 0) {
 					foreach($query_result2 as $key2 => $val2) {
 						$vacant_items[] = array(
 							'id' 					=> $val2->id,
@@ -312,7 +300,6 @@ class Vacancies extends CI_Controller {
 		}
 	}
 
-	// for vacancies
 	public function update_from_plantilla() {
 		$host = getenv('FIREBIRD_CONNECTION_STRING');
 		$username = getenv('FIREBIRD_USERNAME');
@@ -378,7 +365,6 @@ class Vacancies extends CI_Controller {
 						$this->plantilla_updates_history_model->changes 	= json_encode($result);
 						$this->plantilla_updates_history_model->date_updated = date('Y-m-d H:i:s');
 						$this->plantilla_updates_history_model->save(0);
-
 						$arr['data'] = "Vacancies successfully updated";
 					}
 				}
@@ -657,10 +643,7 @@ class Vacancies extends CI_Controller {
 			$path 			= getenv('DOCUMENTS_DIR');
 			$type  		 	= 'Excel5';
 			$name 			= "Vacancies List Template.xls";
-			// $objReader 		= PHPExcel_IOFactory::createReader($type);
 			$objPHPExcel  	= PHPExcel_IOFactory::load($path.$name);
-			// $objPHPExcel 	= $objReader->load($path.$name);
-			// $objPHPExcel 	= $objPHPExcel->setActiveSheetIndex(0);
 
 			// $objPHPExcel = new PHPExcel();
 			$objPHPExcel->getActiveSheet()->setShowGridlines(true);
@@ -719,8 +702,7 @@ class Vacancies extends CI_Controller {
 					      ->setCellValue("I3", "Latest Posting");
 	
 
-			for ($i = 0; $i<$data['totalCount'];$i++)
-			{
+			for ($i = 0; $i<$data['totalCount'];$i++) {
 				$objPHPExcel->setActiveSheetIndex(0)
 						      ->setCellValue("A".($i+4), $data['data'][$i]['plantilla_item_no'])
 						      ->setCellValue("B".($i+4), $data['data'][$i]['item_desc'])

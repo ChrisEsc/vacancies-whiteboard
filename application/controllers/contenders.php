@@ -1,12 +1,10 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Contenders extends CI_Controller {
-
 	public function index() {
 		$data = "";
-
 		$this->load->view('template/header');
-        $this->load->view('contenders/index',$data);
+        $this->load->view('contenders/index', $data);
         $this->load->view('template/footer');
 	}
 
@@ -46,8 +44,7 @@ class Contenders extends CI_Controller {
 			$result = $this->db->query($commandText);
 			$query_count = $result->result();
 
-			if(count($query_result) == 0) 
-			{
+			if(count($query_result) == 0) {
 				$data["totalCount"] = 0;
 				$data["data"] 		= array();
 				die(json_encode($data));
@@ -152,7 +149,6 @@ class Contenders extends CI_Controller {
 			$empstatus	 	= $this->input->post('empstatus');
 			$poscode	 	= $this->input->post('poscode');
 			$priority 		= $this->input->post('priority');
-			
 
 			if($applicanttype == "External") {
 				$emp_no = null;
@@ -222,7 +218,7 @@ class Contenders extends CI_Controller {
 		try {
 			$id	 			= $this->input->post('id');
 			$priority 		= $this->input->post('priority');
-			$new_priority = ($priority == 1) ? 0: 1;
+			$new_priority 	= ($priority == 1) ? 0: 1;
 
 			$commandText = "UPDATE contenders SET priority = $new_priority WHERE id = $id";
 			$result = $this->db->query($commandText);
@@ -238,7 +234,6 @@ class Contenders extends CI_Controller {
 		}
 	}
 
-	// for contenders
 	public function update_from_plantilla() {
 		$host = getenv('FIREBIRD_CONNECTION_STRING');
 		$username = getenv('FIREBIRD_USERNAME');
@@ -248,7 +243,6 @@ class Contenders extends CI_Controller {
 			// Connect to database
 			$dbh = new \PDO($host, $username, $password, [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]);
 			$sql = "SELECT * FROM EMPLOYEES WHERE ((EMPSTATUS = null) OR (EMPSTATUS = 'Casual') OR (EMPSTATUS = 'Co-Terminous') OR (EMPSTATUS = 'Consultant') OR (EMPSTATUS = 'Job Order') OR (EMPSTATUS = 'Permanent') OR (EMPSTATUS = 'Temporary') OR (EMPSTATUS = 'w/Pending Appt.') OR (EMPSTATUS = 'w/Pending RE'))";
-			// Execute query
 			$query = $dbh->query($sql);
 			// Get the result row by row as object
 			$i =0;
@@ -262,7 +256,7 @@ class Contenders extends CI_Controller {
 				$applicanttype  	= "Internal";
 				$empstatus  		= $row->EMPSTATUS;
 				$poscode  			= $row->POSCODE;
-				$img 				= null; // remove soon
+				$img 				= null;
 				$priority 			= 0;
 
 				$arr = array();  
@@ -297,7 +291,6 @@ class Contenders extends CI_Controller {
 						$this->plantilla_updates_history_model->changes 	= json_encode($result);
 						$this->plantilla_updates_history_model->date_updated = date('Y-m-d H:i:s');
 						$this->plantilla_updates_history_model->save(0);
-
 						$arr['data'] = "Contenders successfully updated";
 					}
 				} 
