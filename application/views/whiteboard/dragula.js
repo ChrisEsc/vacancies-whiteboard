@@ -27,36 +27,25 @@ function initDragula() {
   })
   .on("drop", function(el, target, source, sibling) {
     // el.classList.remove("is-moving");
-    // console.log("Drake containers: ", drake.containers);
-    // console.log("El: ", el);
-    // console.log("Target: ", target);
-    // console.log("Source: ", source);
-    // console.log("Sibling: ", sibling);
-
     updateWhiteboard(el.id, source.id, target.id);
   });
 }
 
 function updateUI(contenders, whiteboard){
   for(contender of contenders) {
-    // console.log(contender.name);
     var i = whiteboard.findIndex(x => x.card_id == contender.id);;
     if(i !== -1) { // based on whiteboard data, check if contender needs to be transferred
       var board_id = whiteboard[i].board_id;
       if(document.getElementById(board_id)) { // if yes, check if target container is displayed
         transferCard(contender.id, "contenders", board_id); // 
-        // console.log("Card transferred to another board.");
       }
       else {
         // hide contender (using jquery)
         $("#"+contender.id).toggle();
-        console.log("Card hidden");
       }
-
     }
     else {
       transferCard(contender.id, "contenders", "contenders");
-      // console.log("Card transferred within contenders");
     };
   }
 }
